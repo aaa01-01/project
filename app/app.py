@@ -11,8 +11,13 @@ from googleapiclient.errors import HttpError
 import base64
 
 app = Flask(__name__)
-CORS(app)
-logging.basicConfig(level=logging.INFO)
+# CORS設定を環境変数から取得
+CORS_ORIGIN = os.environ.get('CORS_ORIGIN', '*')
+CORS(app, resources={r"/*": {"origins": CORS_ORIGIN}})
+
+# ロギングレベルを環境変数から取得
+LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO')
+logging.basicConfig(level=getattr(logging, LOG_LEVEL))
 
 # Google Sheets API設定
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
@@ -175,4 +180,6 @@ def add_participant():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    port = int(os.environ.get('PORT', 5001))
+    debug = os.environ.get('DEBUG', 'False').lower() == 'true'
+    app.run(host='0.0.0.0', port=port, debug=debug)

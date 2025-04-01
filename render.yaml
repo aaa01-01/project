@@ -7,6 +7,14 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
+      - key: PORT
+        value: 10000
+      - key: DEBUG
+        value: false
+      - key: LOG_LEVEL
+        value: INFO
+      - key: CORS_ORIGIN
+        value: "*"  # 本番環境では適切なオリジンに制限することを推奨
       - key: SPREADSHEET_ID
         sync: false
       - key: GOOGLE_CREDENTIALS
