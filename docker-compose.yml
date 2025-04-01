@@ -1,0 +1,10 @@
+version: '3'
+services:
+  webapp:
+    build: .
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./app:/app
+      - ./data:/data
+    restart: always

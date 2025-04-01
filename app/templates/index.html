@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>参加者管理アプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>イベント参加者管理</h1>
+        
+        <div class="form-container">
+            <h2>参加者登録</h2>
+            <form id="participantForm">
+                <div class="form-group">
+                    <label for="date">日付:</label>
+                    <select id="date" name="date" required>
+                        <option value="">日付を選択してください</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">新入生氏名:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact">連絡担当者:</label>
+                    <input type="text" id="contact" name="contact" required>
+                </div>
+                <button type="submit">登録</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

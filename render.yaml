@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: event-registration
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app/app.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+      - key: SPREADSHEET_ID
+        sync: false
+      - key: GOOGLE_CREDENTIALS
+        sync: false 
