@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // ローディング画面の要素を取得
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const submitButton = document.getElementById('submitButton');
+
+    // ローディング画面の表示/非表示を制御する関数
+    function toggleLoading(show) {
+        loadingOverlay.style.display = show ? 'flex' : 'none';
+        submitButton.disabled = show;
+    }
+
     // 日付データを取得してチェックボックスを生成
     fetch('/api/dates')
         .then(response => response.json())
@@ -44,6 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const name = document.getElementById('name').value;
         const contact = document.getElementById('contact').value;
 
+        // ローディング画面を表示
+        toggleLoading(true);
+
         // 各選択日付に対して登録処理を実行
         try {
             const promises = selectedDates.map(date => 
@@ -66,6 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('Error:', error);
             alert('登録中にエラーが発生しました');
+        } finally {
+            // ローディング画面を非表示
+            toggleLoading(false);
         }
     });
 });
