@@ -4,7 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>参加者管理アプリ</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .date-checkboxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .date-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -14,10 +66,13 @@
             <h2>参加者登録</h2>
             <form id="participantForm">
                 <div class="form-group">
-                    <label for="date">日付:</label>
-                    <select id="date" name="date" required>
-                        <option value="">日付を選択してください</option>
-                    </select>
+                    <label>参加希望日（複数選択可）:</label>
+                    <div class="date-checkboxes" id="dateCheckboxes">
+                        <!-- 日付のチェックボックスはJavaScriptで動的に生成 -->
+                    </div>
+                    <div class="error" id="dateError" style="display: none;">
+                        少なくとも1つの日付を選択してください
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="name">新入生氏名:</label>
