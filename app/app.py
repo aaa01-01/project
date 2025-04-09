@@ -24,7 +24,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SPREADSHEET_ID = os.environ.get('SPREADSHEET_ID', '1Uyj3dCa06lFODVd9pcr5g8BH7KJs3MA0CAebae2L7og')
 
 def format_sheet_date(date):
-    # 4/15 → 4-15 の形式に変換
+    # 日付の区切り文字を/から-に変更
     return date.replace('/', '-')
 
 def get_google_sheets_service():
@@ -55,7 +55,18 @@ def ensure_sheets_exist(service):
         }
         
         # 必要なシートのリスト（ハイフン形式）
-        required_sheets = ['4-9', '4-11', '4-15', '4-16', '4-17', '4-18', '4-19', '4-22', '4-23', '4-25']
+        required_sheets = [
+            '4-9',
+            '4-11',
+            '4-15(ローストビーフ)',
+            '4-16',
+            '4-17(シュラスコ)',
+            '4-18',
+            '4-19',
+            '4-22(寿司)',
+            '4-23',
+            '4-25'
+        ]
         
         # 作成が必要なシートを特定
         sheets_to_create = [sheet for sheet in required_sheets if sheet not in existing_sheets]
@@ -133,7 +144,18 @@ def index():
 
 @app.route('/api/dates', methods=['GET'])
 def get_dates():
-    dates = ['4/9', '4/11', '4/15', '4/16', '4/17', '4/18', '4/19', '4/22', '4/23', '4/25']
+    dates = [
+        '4-9',
+        '4-11',
+        '4-15(ローストビーフ)',
+        '4-16',
+        '4-17(シュラスコ)',
+        '4-18',
+        '4-19',
+        '4-22(寿司)',
+        '4-23',
+        '4-25'
+    ]
     return jsonify(dates)
 
 @app.route('/api/participants', methods=['POST'])
